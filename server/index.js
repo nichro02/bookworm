@@ -4,7 +4,13 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 
+//import routes
+import postRoutes from './routes/posts.js'
+
 const app = express();
+
+//add posts prefix to post routes
+app.use('/posts', postRoutes)
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
@@ -18,7 +24,6 @@ const MONGODB_URL = `mongodb+srv://${username}:${password}@cluster0.osqwrx5.mong
 const PORT = process.env.PORT || 5000;
 
 //set up mongoose connection
-
 mongoose
   .connect(
     `mongodb+srv://cluster0.osqwrx5.mongodb.net/test?retryWrites=true&w=majority`,
